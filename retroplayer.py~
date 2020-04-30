@@ -79,7 +79,6 @@ class RetroPlayer:
     #######################
     # playback operations #
     #######################
-
     def playsong(self):
         if self.status != "-Playing":
             self.track.set(self.playlist.get(ACTIVE))
