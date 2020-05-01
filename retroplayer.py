@@ -27,8 +27,9 @@ class RetroPlayer:
         self.root.geometry("385x320")
         self.track = StringVar()
         self.status = StringVar()
-        self.wind = "../tapewind.mp3"
-        self.tapedeck = "../cassette sound effect.wav"
+        self.status.set("-NotPlaying")
+        self.wind = "../cassette winding soundeffect.mp3"
+        self.tapedeck = "../cassette inserting soundeffect.mp3"
         playb = u'U+23ef'
         rwb = u'23ee'
         ffb = u'23ed'
@@ -38,7 +39,7 @@ class RetroPlayer:
         # display the track currently playing #
         #######################################
         trackframe = LabelFrame(self.root,
-        bg="grey", fg="white", bd=0, relief=GROOVE)
+        fg="white", bd=0, relief=GROOVE)
         #trackframe.place(x=386, y=0)
         trackframe.place(x=90, y=45)
         songtrack = Label(trackframe,
@@ -61,7 +62,7 @@ class RetroPlayer:
         ####################
         buttonframe = LabelFrame(self.root)
         buttonframe.place(x=0, y=269, width=385, height=193)
-        pausebtn = Button(buttonframe, text=">||", command=self.pausesong,
+        playpausebtn = Button(buttonframe, text=">||", command=self.playpause,
         width=7, height=1).grid(row=0, column=1, padx=10, pady=5)
         ffwdbtn = Button(buttonframe, text=">>", command=self.ffwd,
         width=7, height=1).grid(row=0, column=2, padx=6, pady=5)
@@ -95,7 +96,7 @@ class RetroPlayer:
     def startup(self, song):
         self.p = vlc.MediaPlayer(song)
         self.track.set(song)
-        self.status.set("-Playing")
+        self.status.set("-PlayPause")
         self.p.play()
 
     def stopsong(self):
@@ -103,8 +104,10 @@ class RetroPlayer:
         self.p.stop()
         self.load()
 
-    def pausesong(self):
-        self.status.set("-Paused")
+    def playpause(self):
+        if self.status.get() == "-NotPlaying":
+            self.startup(self.pl[0])
+        self.status.set("-PlayPause")
         self.p.pause()
 
     def ffwd(self):
@@ -136,6 +139,7 @@ class RetroPlayer:
         self.p = vlc.MediaPlayer(self.wind)
         self.p.play()
         time.sleep(4)
+
 
 #######################################
 # play the spinning tape cassette gif #
@@ -174,7 +178,7 @@ class ImageLabel(Label):
 root = Tk()
 lbl = ImageLabel(root)
 lbl.pack(side="left", anchor=NW)
-lbl.load("spinning tape.gif")
+lbl.load("tape spinning.gif")
 #style = ThemedStyle(root)
 #style.set_theme("arc")
 RetroPlayer(root)
