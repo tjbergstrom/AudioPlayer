@@ -30,10 +30,6 @@ class RetroPlayer:
         self.status.set("-NotPlaying")
         self.wind = "../cassette winding soundeffect.mp3"
         self.tapedeck = "../cassette inserting soundeffect.mp3"
-        playb = u'U+23ef'
-        rwb = u'23ee'
-        ffb = u'23ed'
-        stopb = u'25fc'
 
         #######################################
         # display the track currently playing #
