@@ -1,13 +1,14 @@
-# Retro audio player
+# retroplayer.py
+# April 2020
 # Plays mp3s and wavs through VLC
-# Loads a gif of some retro cassette tape or another
+# Loads a gif of some retro cassette tape
 # And the tape spins while playing
 # Starts up with a cassette tape loading sound effect
 # Clicking next/prev track plays a cassette winding sound effect
 # Expand the window to the right to see the playlist
 
-# usage:
 # python3 retroplayer.py
+
 
 from ttkthemes import ThemedStyle
 from itertools import count
@@ -18,6 +19,7 @@ import time
 import vlc
 import cv2
 import os
+
 
 class RetroPlayer:
     def __init__(self,root):
@@ -179,6 +181,8 @@ lbl.load("tape spinning.gif")
 #style.set_theme("arc")
 RetroPlayer(root)
 root.mainloop()
+
+
 # easily change gif dimensions:
 # https://ezgif.com/resize/ezgif-7-f720df37ff39.gif
 
